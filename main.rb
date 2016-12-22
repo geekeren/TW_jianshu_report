@@ -18,7 +18,6 @@ end
 
 
 authorInfoList = loadAuthorListFromFile("studentlist.csv")
-print "\n\n Note:真实姓名被保护，如果你要统计思沃大讲堂同学简书文章信息请通过微信向我索取\n"
 print "\n开始抓取\n"
 
 def printProcess(completed, total)
