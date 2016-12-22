@@ -40,7 +40,7 @@ class ReportCreator
       if articles.length != 0
         content+=format(" <li>
             <span class=\"author_title\"><a target= \"_blank\" href=\"http://jianshu.com/users/%s\">%s</a></span>
-            <span class=\"buddy_title\">%s</span>", authorArticle["authorID"], authorArticle["authorName"], authorArticle["authorBuddy"])
+             小buddy：<span class=\"buddy_title\">%s</span>", authorArticle["authorID"], authorArticle["authorName"], authorArticle["authorBuddy"])
         content+="<ol>"
         articles.each { |article|
           content+=format(" <li>
@@ -60,7 +60,7 @@ class ReportCreator
       startTime, endTIme=@time
       timeStr= "#{startTime} 到 #{endTIme}";
     end
-    footer="Powered By <a target=\"_blank\" href=\"http://wangbaiyuan.cn\">BrainWang@ThoughtWorks</a>"
+    footer="Powered By <a target=\"_blank\" href=\"http://www.jianshu.com/collection/efbfebc85205\">思沃大讲堂@ThoughtWorks</a>"
     out = tplContent.gsub(/@\{title\}/, title)
     out = out.gsub(/@\{content\}/, content)
     out = out.gsub(/@\{footer\}/, footer)
