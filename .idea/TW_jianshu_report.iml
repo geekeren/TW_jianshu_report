@@ -64,8 +64,7 @@
     <orderEntry type="jdk" jdkName="rbenv: 2.3.3" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.13.6, rbenv: 2.3.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="io-console (v0.4.5, rbenv: 2.3.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="json (v2.0.2, rbenv: 2.3.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mini_portile2 (v2.1.0, rbenv: 2.3.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.6.8.1, rbenv: 2.3.3) [gem]" level="application" />
   </component>
 </module>
