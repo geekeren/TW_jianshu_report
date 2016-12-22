@@ -61,4 +61,4 @@ authorInfoList.each_with_index { |authorInfo, i|
 
 # p authorInfoList
 
-ReportCreator.loadAuthorArticlesList(authorArticleInfoList).setTime(dateStart,dateEnd).out2Html("2017届思沃大讲堂同学简书文章统计")
+ReportCreator.loadAuthorArticlesList(authorArticleInfoList).setTime(ARGV[0],ARGV[1]).out2Html("2017届思沃大讲堂同学简书文章统计")
