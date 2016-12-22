@@ -9,7 +9,7 @@ Ruby爬虫统计简书用户的文章信息
 
 ```
 git clone https://github.com/geekeren/TW_jianshu_report.git
-cd jianshu_spider/
+cd TW_jianshu_report/
 bundle
  ruby main.rb 2016-12-18 2016-12-23
 ```
