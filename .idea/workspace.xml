@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2ed928a-68e7-4e55-9f47-c37a95d5acbe" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output/2017届思沃大讲堂同学简书文章统计(2016-12-15).html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output/2017届思沃大讲堂同学简书文章统计(2016-12-17).html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output/2017届思沃大讲堂同学简书文章统计(2016-12-18).html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output/2017届思沃大讲堂同学简书文章统计(2016-12-22).html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/studentlist.csv" afterPath="$PROJECT_DIR$/studentlist.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/TW_jianshu_report.iml" afterPath="$PROJECT_DIR$/.idea/TW_jianshu_report.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.rb" afterPath="$PROJECT_DIR$/main.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/tw_author_info.rb" afterPath="$PROJECT_DIR$/model/tw_author_info.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report_creator.rb" afterPath="$PROJECT_DIR$/report_creator.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/default.tpl.html" afterPath="$PROJECT_DIR$/view/default.tpl.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/2017届思沃大讲堂文章统计(2016-12-25).html" afterPath="$PROJECT_DIR$/output/2017届思沃大讲堂文章统计(2016-12-25).html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -127,8 +116,8 @@
       <file leaf-file-name="2017届思沃大讲堂文章统计(2016-12-25).html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/output/2017届思沃大讲堂文章统计(2016-12-25).html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1509">
-              <caret line="65" column="9" lean-forward="false" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+            <state relative-caret-position="30">
+              <caret line="146" column="22" lean-forward="false" selection-start-line="146" selection-start-column="22" selection-end-line="146" selection-end-column="22" />
               <folding>
                 <element signature="e#853#1382#0" expanded="false" />
                 <element signature="n#src#0;n#img#0;n#section#0;n#section#2;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -487,16 +476,16 @@
       <workItem from="1482325680842" duration="2760000" />
       <workItem from="1482395229539" duration="1445000" />
       <workItem from="1482397247827" duration="13479000" />
-      <workItem from="1482661369849" duration="16839000" />
+      <workItem from="1482661369849" duration="17490000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34735000" />
+    <option name="totallyTimeSpent" value="35386000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16187595" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -505,7 +494,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.49372056" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4056604" sideWeight="0.7549168" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22169812" sideWeight="0.8630862" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22169812" sideWeight="0.8630862" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39327484" sideWeight="0.7700157" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -910,8 +899,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/output/2017届思沃大讲堂文章统计(2016-12-25).html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1509">
-          <caret line="65" column="9" lean-forward="false" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+        <state relative-caret-position="30">
+          <caret line="146" column="22" lean-forward="false" selection-start-line="146" selection-start-column="22" selection-end-line="146" selection-end-column="22" />
           <folding>
             <element signature="e#853#1382#0" expanded="false" />
             <element signature="n#src#0;n#img#0;n#section#0;n#section#2;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
