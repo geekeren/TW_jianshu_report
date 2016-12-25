@@ -2,7 +2,7 @@ require './model/authorInfo'
 class TWAuthorInfo < AuthorInfo
   #从字符串加载对象
   def self.fromPlain(str, separator=",")
-    items = str.split(/#{separator}/)
+    items = str.force_encoding("utf-8").split(/#{separator}/)
     TWAuthorInfo.new(items[0], items[1], items[2].strip)
   end
 

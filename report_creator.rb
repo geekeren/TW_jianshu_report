@@ -33,36 +33,47 @@ class ReportCreator
     tplFile = open @tpl
     tplContent = tplFile.read
     tplFile.close
-    content ="<ul>"
+    listContent ="<ul>"
+    this_active_author_count=0
+    this_post_count=0
+    this_view_count=0
     for i in 0 .. @authorArticlesList.length-1
       authorArticle = @authorArticlesList[i]
       articles = authorArticle["articles"]
+      this_post_count+=articles.length
       if articles.length != 0
-        content+=format(" <li>
-            <span class=\"author_title\"><a target= \"_blank\" href=\"http://jianshu.com/users/%s\">%s</a></span>
+        this_active_author_count=this_active_author_count+1
+        listContent+=format(" <li>
+            <span class=\"title author_title\"><a target= \"_blank\" href=\"http://jianshu.com/users/%s\">%s</a></span>
              小buddy：<span class=\"buddy_title\">%s</span>", authorArticle["authorID"], authorArticle["authorName"], authorArticle["authorBuddy"])
-        content+="<ol>"
+        listContent+="<ol>"
         articles.each { |article|
-          content+=format(" <li>
+          this_view_count=this_view_count+(article["readed"].to_i)
+          listContent+=format(" <li>
             <span  class=\"article_title\"><a target= \"_blank\" href=\"%s\">%s</a></span>
-            <span  class=\"article_time\">%s</span>", article["link"], article["title"], article["time"])
+<span class=\"post_info\">（ 浏览 <span  class=\"article_view\">%s</span> | 评论 <span  class=\"article_comment\">%s</span> | 喜欢<span  class=\"article_like\">%s</span>）<span  class=\"article_time\">%s</span><span>
+            ", article["link"], article["title"], article["readed"], article["comment"], article["like"], article["time"])
 
         }
-        content+="</ol></li>"
+        listContent+="</ol></li>"
       end
 
     end
 
-    content+="</ul>"
+    listContent+="</ul>"
     today = Time.new
     timeStr= today.strftime("(%Y-%m-%d %H:%M:%S)");
     if @time
       startTime, endTIme=@time
       timeStr= "#{startTime} 到 #{endTIme}";
     end
-    footer="Powered By <a target=\"_blank\" href=\"http://www.jianshu.com/collection/efbfebc85205\">思沃大讲堂@ThoughtWorks</a>"
-    out = tplContent.gsub(/@\{title\}/, title)
-    out = out.gsub(/@\{content\}/, content)
+    footer="Powered By <a target=\"_blank\" href=\"http://www.jianshu.com/collection/efbfebc85205\">思沃大讲堂@ThoughtWorks</a>，"
+    footer+="<a target=\"_blank\" href=\"https://bbs.excellence-girls.org/topic/257/%E5%A4%A7%E8%AE%B2%E5%A0%82%E7%88%AC%E8%99%AB%E9%A1%B9%E7%9B%AE%E7%BB%84-%E9%A1%B9%E7%9B%AE%E5%AE%97%E6%97%A8\">加入项目组</a>"
+    out = tplContent.force_encoding("utf-8").gsub(/@\{title\}/, title)
+    out = out.gsub(/@\{this_active_author_count\}/, this_active_author_count.to_s)
+    out = out.gsub(/@\{this_view_count\}/, this_view_count.to_s)
+    out = out.gsub(/@\{this_post_count\}/, this_post_count.to_s)
+    out = out.gsub(/@\{list\}/, listContent)
     out = out.gsub(/@\{footer\}/, footer)
     out = out.gsub(/@\{time\}/, timeStr)
     timeStr= today.strftime("(%Y-%m-%d)");
