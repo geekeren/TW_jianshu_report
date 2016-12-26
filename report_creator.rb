@@ -1,7 +1,9 @@
 require 'pathname'
+require "./model/mail"
 class ReportCreator
 
   def initialize(authorArticlesList)
+    @createTime=Time.new
     @tpl="view/default.tpl.html"
     @authorArticlesList = authorArticlesList
   end
@@ -30,10 +32,11 @@ class ReportCreator
   end
 
   def out2Html(title)
+    @title=title
     tplFile = open @tpl
     tplContent = tplFile.read
     tplFile.close
-    listContent ="<ul>"
+    listContent ="<ul  class=\"ul\">"
     this_active_author_count=0
     this_post_count=0
     this_view_count=0
@@ -43,13 +46,13 @@ class ReportCreator
       this_post_count+=articles.length
       if articles.length != 0
         this_active_author_count=this_active_author_count+1
-        listContent+=format(" <li>
+        listContent+=format(" <li  class=\"ul_li\">
             <span class=\"title author_title\"><a target= \"_blank\" href=\"http://jianshu.com/users/%s\">%s</a></span>
              小buddy：<span class=\"buddy_title\">%s</span>", authorArticle["authorID"], authorArticle["authorName"], authorArticle["authorBuddy"])
-        listContent+="<ol>"
+        listContent+="<ol class=\"ol\">"
         articles.each { |article|
           this_view_count=this_view_count+(article["readed"].to_i)
-          listContent+=format(" <li>
+          listContent+=format(" <li class=\"ol_li\">
             <span  class=\"article_title\"><a target= \"_blank\" href=\"%s\">%s</a></span>
 <span class=\"post_info\">（ 浏览 <span  class=\"article_view\">%s</span> | 评论 <span  class=\"article_comment\">%s</span> | 喜欢<span  class=\"article_like\">%s</span>）<span  class=\"article_time\">%s</span><span>
             ", article["link"], article["title"], article["readed"], article["comment"], article["like"], article["time"])
@@ -61,7 +64,7 @@ class ReportCreator
     end
 
     listContent+="</ul>"
-    today = Time.new
+    today = @createTime
     timeStr= today.strftime("(%Y-%m-%d %H:%M:%S)");
     if @time
       startTime, endTIme=@time
@@ -76,13 +79,23 @@ class ReportCreator
     out = out.gsub(/@\{list\}/, listContent)
     out = out.gsub(/@\{footer\}/, footer)
     out = out.gsub(/@\{time\}/, timeStr)
-    timeStr= today.strftime("(%Y-%m-%d)");
-    file=open("output/#{title+timeStr}.html", "w")
+    timeStr= today.strftime("[%Y-%m-%d]")
+    file=open("output/#{timeStr+title}.html", "w")
     file.write out
     print "\n输出文件位于", Pathname.new(File.dirname(__FILE__)).realpath, "/", file.path, "\n"
+    @reportPath = Pathname.new(File.dirname(__FILE__)).realpath.to_s+ "/"+ file.path
     file.close
 
+
+    self
   end
 
+  def sendEmail(toName,toAddr)
+    if @reportPath && @title
+
+      Mail.new().sendMailFromHtmlFile(toName, toAddr, @createTime.strftime("[%Y-%m-%d]")+@title, @reportPath)
+
+    end
+  end
 
 end
