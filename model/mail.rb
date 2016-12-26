@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'net/smtp'
 require './lib/mailfactory'
-require 'wicked_pdf'
+# require 'wicked_pdf'
 class Mail
   def initialize()
 
@@ -15,10 +15,10 @@ class Mail
     mail.to = toAddr.join(';')
     mail.from = "思沃简书爬虫团队 <tw_report@wangbaiyuan.cn>"
     mail.subject = subject
-    pdfFile = WickedPdf.new.pdf_from_html_file(htmlFile)
-    File.open(fileName+".pdf", 'wb') do |file|
-      file << pdfFile
-    end
+    # pdfFile = WickedPdf.new.pdf_from_html_file(htmlFile)
+    # File.open(fileName+".pdf", 'wb') do |file|
+    #   file << pdfFile
+    # end
     mail.attach(htmlFile,"text/plain","content-type:text/plain; charset=utf-8")
     htmlFile = open htmlFile
     htmlFileContent = htmlFile.read
