@@ -36,10 +36,13 @@ ruby main.rb 2016-12-18 2016-12-23
 ## 输入文件
 
 * `studentlist.csv`：用户列表文件，csv格式
+
+每一行记录用户ID(简书用户主页URL `/users/`后面的字段)，用户姓名，小buddy姓名
+
+
 * `data/jianshu.sqlite3`数据库文件：
  主要注意的是JSID是简书的用户ID，一堆字符串，ID是本项目自己的用户ID，从1开始，是整型，因为有些buddy的简书ID没有收集。
- 每一行记录用户ID(简书用户主页URL `/users/`后面的字段)，用户姓名，小buddy姓名
-
+ 
 ## 输出文件
 
 位于`out`文件夹下
