@@ -12,34 +12,35 @@ module Spider
     i = 1
     arr = Array.new
     loop do
-      url = URI.escape("#{HOST}/users/#{uuid}/latest_articles?page=#{i}")
-      articlesJS = getJsFromUrl(URI(url))
+      url = URI.escape("#{HOST}/users/#{uuid}?order_by=shared_at&page=#{i}")
+      articlesHTML = getHtmlWithXMLRequestFromUrl(URI(url))
 
-      if /\$\('ul.latest-notes'\).append\("(.*?)"\)/ =~ articlesJS
-        articlesHTML= $1
-      end
-      articlesHTML= String.class_eval(%Q("#{articlesHTML}"))
+      # if /\$\('ul.latest-notes'\).append\("(.*?)"\)/ =~ articlesJS
+      #   articlesHTML= $1
+      # end
+      # print articlesHTML
+      # articlesHTML= String.class_eval(%Q("#{articlesHTML}"))
       #print "content:", YAML.load(%Q("#{articlesHTML}"))
       dom = Nokogiri::HTML("<div>#{articlesHTML}</div>")
-      if articlesHTML == ""
+      if articlesHTML =~ /^[\s]*$/
         break
       end
       dom.css("li").each do |li|
         # 时间
         time = DateTime.parse(li.css("span.time").attr("data-shared-at").to_s).strftime('%Y-%m-%d')
         # 标题
-        title = li.css("h4.title").css("a").text.to_s
+        title = li.css("div.content").css("a.title").text.to_s
         # 文章地址
-        link = li.css("h4.title").css("a").attr("href").to_s
+        link = li.css("div.content").css("a.title").attr("href").to_s
         # 阅读量
-        readedStr = li.css("div.list-footer").css("a")[0].text.to_s.strip
-        readedNumber = readedStr[3..readedStr.length]
+        readedStr = li.css("div.meta").css("a")[0].text.to_s.strip
+        readedNumber = readedStr
         # 评论
-        commentStr = li.css("div.list-footer").css("a")[1].text.to_s.strip
-        commentNumber = commentStr[5..commentStr.length]
+        commentStr = li.css("div.meta").css("a")[1].text.to_s.strip
+        commentNumber = commentStr
         # 喜欢
-        likeStr = li.css("div.list-footer").css("span").text.to_s.strip
-        likeNumber = likeStr[5..likeStr.length]
+        likeStr = li.css("div.meta").css("a")[2].text.to_s.strip
+        likeNumber = likeStr
         articleObj = Hash.new
         articleObj = {
             "author_id" => "#{uuid}",
@@ -84,10 +85,11 @@ module Spider
   end
 
 
-  def self.getJsFromUrl(url)
+  def self.getHtmlWithXMLRequestFromUrl(url)
     uri = URI(url)
     req = Net::HTTP::Get.new(uri)
-    req['Accept'] = "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01"
+    req['Accept'] = "text/html, */*; q=0.01"
+    req['X-INFINITESCROLL'] = "true"
     req['X-Requested-With'] = "XMLHttpRequest"
     res = Net::HTTP.start(uri.hostname, uri.port) { |http|
       http.request(req)
@@ -104,3 +106,4 @@ module Spider
     res.body.to_s
   end
 end
+# puts Spider.getLatestArticlesByUUID("ef49e6b7ec1e")
