@@ -12,7 +12,7 @@ module Spider
     i = 1
     arr = Array.new
     loop do
-      url = URI.escape("#{HOST}/users/#{uuid}?order_by=shared_at&page=#{i}")
+      url = URI.escape("#{HOST}/u/#{uuid}?order_by=shared_at&page=#{i}")
       articlesHTML = getHtmlWithXMLRequestFromUrl(URI(url))
 
       # if /\$\('ul.latest-notes'\).append\("(.*?)"\)/ =~ articlesJS
