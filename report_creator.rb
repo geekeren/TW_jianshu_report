@@ -2,14 +2,15 @@ require 'pathname'
 require "./model/mail"
 class ReportCreator
 
-  def initialize(authorArticlesList)
+
+  def initialize(startTime, endTime)
     @createTime=Time.new
     @tpl="view/default.tpl.html"
-    @authorArticlesList = authorArticlesList
+    setTime(startTime, endTime)
   end
 
-  def self.loadAuthorArticlesList(authorArticlesList)
-    ReportCreator.new(authorArticlesList)
+  def loadAuthorArticlesList(authorArticlesList)
+    @authorArticlesList = authorArticlesList
   end
 
 
@@ -18,8 +19,55 @@ class ReportCreator
     self
   end
 
-  def render()
+  def printProcess(completed, total)
+    rate = ((completed.to_f/total)*20).to_i
+    rateStr="["
+    rate.times {
+      rateStr+="#"
+    }
 
+    (20-rate).times {
+      rateStr+=" "
+    }
+    rateStr+="]"
+
+    print "\r完成进度： #{rateStr}  #{completed/total==1 ? "completed!" : format("%s/%s", completed, total) }"
+  end
+
+  def start
+    startTime, endTime= @time
+    dateReg = /\d{4}-\d{2}-\d{2}/
+    if startTime==nil || endTime==nil
+      today = Time.new
+      timeStr= today.strftime("%Y-%m-%d")
+      todayYmd=Time.parse(timeStr)
+      sevenDayAgoYmd=todayYmd-604800
+
+      @time = sevenDayAgoYmd,todayYmd
+      print "默认统计一周内文章……\n"
+    elsif startTime=~ dateReg and endTime=~ dateReg
+      dateStart = Time.parse(dateStart)
+      dateEnd = Time.parse(dateEnd)
+      print "统计#{dateStart}到#{dateEnd}内文章……\n"
+    else
+      print "请输入正确的开始时间和结束时间（如2016-12-23 2017-01-01）"
+      exit
+    end
+
+    authorArticleInfoList=Array.new
+    @authorInfoList.each_with_index { |authorInfo, i|
+      #loadAuthorInfoFromNet(authorInfo)
+      authorArticleInfo = Hash.new
+      startTime, endTime= @time
+      articles = Spider.getArticlesByUserIdBetweenTime(authorInfo.id, startTime, endTime)
+      authorArticleInfo["authorID"]=authorInfo.id
+      authorArticleInfo["authorBuddy"]=authorInfo.buddy
+      authorArticleInfo["authorName"]=authorInfo.name
+      authorArticleInfo["articles"]=articles
+      authorArticleInfoList << authorArticleInfo
+      printProcess(i+1, @authorInfoList.length)
+    }
+    loadAuthorArticlesList(authorArticleInfoList)
   end
 
   def rank
@@ -31,8 +79,8 @@ class ReportCreator
     self
   end
 
-  def out2Html(title)
-    @title=title
+  def out2Html
+
     tplFile = open @tpl
     tplContent = tplFile.read
     tplFile.close
@@ -65,14 +113,16 @@ class ReportCreator
 
     listContent+="</ul>"
     today = @createTime
-    timeStr= today.strftime("(%Y-%m-%d %H:%M:%S)");
+    timeStr= today.strftime("(%Y-%m-%d %H:%M:%S)")
     if @time
       startTime, endTIme=@time
+      startTime= startTime.strftime("%Y-%m-%d")
+      endTIme= endTIme.strftime("%Y-%m-%d")
       timeStr= "#{startTime} 到 #{endTIme}";
     end
     footer="Powered By <a target=\"_blank\" href=\"http://www.jianshu.com/collection/efbfebc85205\">思沃大讲堂@ThoughtWorks</a>，"
     footer+="<a target=\"_blank\" href=\"https://bbs.excellence-girls.org/topic/257/%E5%A4%A7%E8%AE%B2%E5%A0%82%E7%88%AC%E8%99%AB%E9%A1%B9%E7%9B%AE%E7%BB%84-%E9%A1%B9%E7%9B%AE%E5%AE%97%E6%97%A8\">加入项目组</a>"
-    out = tplContent.force_encoding("utf-8").gsub(/@\{title\}/, title)
+    out = tplContent.force_encoding("utf-8").gsub(/@\{title\}/, @title)
     out = out.gsub(/@\{this_active_author_count\}/, this_active_author_count.to_s)
     out = out.gsub(/@\{this_view_count\}/, this_view_count.to_s)
     out = out.gsub(/@\{this_post_count\}/, this_post_count.to_s)
@@ -80,7 +130,7 @@ class ReportCreator
     out = out.gsub(/@\{footer\}/, footer)
     out = out.gsub(/@\{time\}/, timeStr)
     timeStr= today.strftime("[%Y-%m-%d]")
-    file=open("output/#{timeStr+title}.html", "w")
+    file=open("output/#{timeStr+@title}.html", "w")
     file.write out
     print "\n输出文件位于", Pathname.new(File.dirname(__FILE__)).realpath, "/", file.path, "\n"
     @reportPath = Pathname.new(File.dirname(__FILE__)).realpath.to_s+ "/"+ file.path
@@ -90,7 +140,7 @@ class ReportCreator
     self
   end
 
-  def sendEmail(toName,toAddr)
+  def sendEmail(toName, toAddr)
     if @reportPath && @title
 
       Mail.new().sendMailFromHtmlFile(toName, toAddr, @createTime.strftime("[%Y-%m-%d]")+@title, @reportPath)
@@ -98,4 +148,12 @@ class ReportCreator
     end
   end
 
+  def setTitle(title)
+    @title=title
+    self
+  end
+
+  def setAuthorInfoList(authorInfoList)
+    @authorInfoList=authorInfoList
+  end
 end

@@ -58,13 +58,25 @@ module Spider
     return arr
   end
 
-  def self.getArticlesByUserIdBetweenTime(startTime, endTime)
-
+  def Spider.getArticlesByUserIdBetweenTime(uuid, startTime, endTime)
+    articles = Spider.getLatestArticlesByUUID(uuid)
+    articles.delete_if do |article|
+      time = Time.parse(article["time"])
+      !(time >= startTime && time <= endTime)
+    end
+    articles
   end
 
-  #获取用户的所有文章
-  def self.getArticlesByUserIdBetweenTime(uuid)
+  def self.getArticlesByUserIdWithinThisWeek(uuid)
 
+    today = Time.new
+    timeStr= today.strftime("%Y-%m-%d")
+    todayYmd=Time.parse(timeStr)
+    sevenDayAgoYmd=todayYmd-604800
+
+
+    articles = Spider.getArticlesByUserIdBetweenTime(uuid, sevenDayAgoYmd, todayYmd)
+    articles
   end
 
 
@@ -106,4 +118,10 @@ module Spider
     res.body.to_s
   end
 end
+
+# today = Time.new
+# timeStr= today.strftime("%Y-%m-%d")
+# todayYmd=Time.parse(timeStr)
+# sevenDayAgoYmd=todayYmd-604800
+# sevenDayAgoYmdStr = sevenDayAgoYmd.strftime("%Y-%m-%d")
 # puts Spider.getLatestArticlesByUUID("ef49e6b7ec1e")

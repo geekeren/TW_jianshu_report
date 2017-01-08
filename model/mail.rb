@@ -19,7 +19,7 @@ class Mail
     # File.open(fileName+".pdf", 'wb') do |file|
     #   file << pdfFile
     # end
-    mail.attach(htmlFile,"text/plain","content-type:text/plain; charset=utf-8")
+    mail.attach(htmlFile,"text/html","Content-Type:text/html; charset=utf-8")
     htmlFile = open htmlFile
     htmlFileContent = htmlFile.read
 
