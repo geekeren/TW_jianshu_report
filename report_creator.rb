@@ -46,9 +46,10 @@ class ReportCreator
       @time = sevenDayAgoYmd,todayYmd
       print "默认统计一周内文章……\n"
     elsif startTime=~ dateReg and endTime=~ dateReg
-      dateStart = Time.parse(dateStart)
-      dateEnd = Time.parse(dateEnd)
-      print "统计#{dateStart}到#{dateEnd}内文章……\n"
+      startTime=Time.parse(startTime)
+      endTime = Time.parse(endTime)
+      @time = startTime,endTime
+      print "统计#{startTime.strftime("%Y-%m-%d")}到#{endTime.strftime("%Y-%m-%d")}内文章……\n"
     else
       print "请输入正确的开始时间和结束时间（如2016-12-23 2017-01-01）"
       exit
@@ -59,6 +60,7 @@ class ReportCreator
       #loadAuthorInfoFromNet(authorInfo)
       authorArticleInfo = Hash.new
       startTime, endTime= @time
+
       articles = Spider.getArticlesByUserIdBetweenTime(authorInfo.id, startTime, endTime)
       authorArticleInfo["authorID"]=authorInfo.id
       authorArticleInfo["authorBuddy"]=authorInfo.buddy
