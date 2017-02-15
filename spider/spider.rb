@@ -27,7 +27,7 @@ module Spider
       end
       dom.css("li").each do |li|
         # 时间
-        time = DateTime.parse(li.css("span.time").attr("data-shared-at").to_s).strftime('%Y-%m-%d')
+        time = DateTime.parse(li.css("div.content").css("div.author").css("div.name").css("span.time").attr("data-shared-at").to_s).strftime('%Y-%m-%d')
         # 标题
         title = li.css("div.content").css("a.title").text.to_s
         # 文章地址
@@ -39,7 +39,7 @@ module Spider
         commentStr = li.css("div.meta").css("a")[1].text.to_s.strip
         commentNumber = commentStr
         # 喜欢
-        likeStr = li.css("div.meta").css("a")[2].text.to_s.strip
+        likeStr = li.css("div.meta").css("span").text.to_s.strip
         likeNumber = likeStr
         articleObj = Hash.new
         articleObj = {
