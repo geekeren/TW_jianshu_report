@@ -30,6 +30,6 @@ toAddr=["xn_shelly@qq.com", "18600064502@163.com", "zhangxingzhi777@163.com", "h
         "18792561236@163.com", "1586320567@qq.com", "1490313846@qq.com", "bme_ritter@foxmail.com",
         "libra1014tyb@163.com", "18829292695@163.com", "wy_b1995@163.com", "550047450@qq.com",
         "1370322806@qq.com", "tw-2017-lecture-volunteers@thoughtworks.com"]
-toAddr=["1586320567@qq.com"]
+# toAddr=["1586320567@qq.com"]
 report.sendEmail("", toAddr)
 print "邮件群发成功！"

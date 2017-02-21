@@ -14,19 +14,25 @@ class Mail
     htmlFile=fileName
     mail.to = toAddr.join(';')
     mail.from = "思沃简书爬虫团队 <tw_report@wangbaiyuan.cn>"
-    mail.subject = subject
+    mail.subject = subject.force_encoding("UTF-8")
     # pdfFile = WickedPdf.new.pdf_from_html_file(htmlFile)
     # File.open(fileName+".pdf", 'wb') do |file|
     #   file << pdfFile
     # end
-    mail.attach(htmlFile,"text/html","Content-Type:text/html; charset=utf-8")
-    htmlFile = open htmlFile
-    htmlFileContent = htmlFile.read
+    mail.attach(htmlFile, "text/html", "Content-Type:text/html; charset=utf-8")
 
-    mail.html = "<div style=\"margin:15px;background:#FFF\">同学，#{subject}报告发布了！<br>如果本报告阅读体验不佳，请<span style=\"color:red;font-weight:bold\">下载查看附件</span>；邮件由系统发出，请勿回复！<br>
-</div>"+htmlFileContent.force_encoding('utf-8')
+    mailFile = open htmlFile+".mail.txt"
+    mailFileContent = mailFile.read.force_encoding("UTF-8")
+    if mailFileContent =~ /<body>([\s\S]*?)<\/body>/
 
-    #  mail.attach("D://script//ruby//中文正常abc.doc")
+      mailFileContent = $1
+    end
+
+
+    mail.html = "<div><div style=\"margin:15px;background:#FFF\">同学，#{subject}报告发布了！<br>如果本报告阅读体验不佳，请<span style=\"color:red;font-weight:bold\">下载查看附件</s pan> ； 邮件由系统发出 ， 请勿回复 ！<br>
+      </div>#{mailFileContent}</div>";
+
+    #  mail.attach("D://script//ruby//中文正常abc.doc ")
 
     #另外声明一个接收人的地址列表
 

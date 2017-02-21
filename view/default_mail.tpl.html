@@ -1,0 +1,106 @@
+<body style="
+    background: #dddddd;
+    font-family: &quot;Microsoft YaHei&quot;, &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.42857143;
+    overflow-x: hidden;
+">
+<section class="body">
+    <section class="main" style="
+    padding: 10px 20px 10px 20px;
+    margin: 0 auto;
+    height: auto;
+    width: inherit;
+    word-break: normal;
+    word-wrap: break-word;
+    position: relative;
+    overflow-x: auto;
+    background: #fff;
+    max-width: 850px;
+">
+        <header style="
+    margin: 10px 5px 15px 5px;
+    text-align: right;
+">
+            <h1 style="
+    text-align: center;
+    font-size: 1.8em;
+">@{title}</h1>
+            <section class="time header"><span class="title">统计周期</span>：@{timeStr}</section>
+        </header>
+        <section id="content">
+
+            <section class="note" style="
+    font-size: 0.9em;
+    padding: 10px;
+    background: #FCFCFC;
+    border: 1px #E7E7E7 solid;
+    overflow: hidden;
+">
+                <section class="note_part" style="
+    width: 50%;
+    float: left;
+">
+                    <header class="title">项目宗旨</header>
+                    <section class="content note_content">
+                        <li>发掘最有价值的文章</li>
+                        <li>提倡博客写作习惯</li>
+                        <li>发现最贴心的buddy</li>
+                    </section>
+                </section>
+                <section class="note_part" style="
+    width: 50%;
+    float: left;
+">
+                    <header class="title">项目主页</header>
+                    <section class="content">
+                        <li> Github： <br><a href="https://github.com/geekeren/TW_jianshu_report">geekeren/TW_jianshu_report</a></li>
+                        <li>卓越女生论坛：<br>
+                            <a href="https://bbs.excellence-girls.org/topic/257/%E5%A4%A7%E8%AE%B2%E5%A0%82%E7%88%AC%E8%99%AB%E9%A1%B9%E7%9B%AE%E7%BB%84-%E9%A1%B9%E7%9B%AE%E5%AE%97%E6%97%A8">
+                                思沃大讲堂/大讲堂爬虫项目组
+                            </a></li>
+                    </section>
+                </section>
+
+            </section>
+
+            <section class="total">
+                <header><h2>文章总计</h2></header>
+                <section class="total_content" style="
+    max-width: 560px;
+    margin: 0px auto;
+">
+                    <section class="total_part">
+                        <header class="total_part_header" style="font-weight: bold; color: #ff34b5;">本期文章数</header>
+                        <section class="total_part_section" style=" font-size: 1.8em;
+            padding-top: 13px;
+            color: #7525ad;">@{this_post_count}
+                        </section>
+                    </section>
+                    <section class="total_part">
+                        <header class="total_part_header" style="font-weight: bold; color: #ff34b5;">活跃作者量</header>
+                        <section class="total_part_section" style=" font-size: 1.8em;
+            padding-top: 13px;
+            color: #7525ad;">@{this_active_author_count}
+                        </section>
+                    </section>
+                    <section class="total_part">
+                        <header class="total_part_header" style="font-weight: bold; color: #ff34b5;">文章被阅读次数</header>
+                        <section class="total_part_section" style=" font-size: 1.8em;
+            padding-top: 13px;
+            color: #7525ad;">@{this_view_count}
+                        </section>
+                    </section>
+                </section>
+
+            </section>
+            <section>
+                <header><h2>文章列表</h2></header>
+                <section>@{listContent}</section>
+            </section>
+
+        </section>
+        <footer>@{footer}</footer>
+    </section>
+</section>
+</body>
