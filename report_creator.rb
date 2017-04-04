@@ -157,7 +157,7 @@ class ReportCreator
     hostname = 'localhost'
     port = 10086
     s = TCPSocket.open(hostname, port)
-    s.puts "1||",@reportPath,"**同学们，<<",@createTime.strftime("[%Y-%m-%d]")+@title,">>发布了！"
+    s.put "1||",@reportPath,"**同学们，<<",@createTime.strftime("[%Y-%m-%d]")+@title,">>发布了！"
     s.close
   end
 
