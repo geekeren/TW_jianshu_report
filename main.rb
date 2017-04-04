@@ -32,4 +32,5 @@ toAddr=["xn_shelly@qq.com", "18600064502@163.com", "zhangxingzhi777@163.com", "h
         "1370322806@qq.com", "tw-2017-lecture-volunteers@thoughtworks.com"]
 # toAddr=["1586320567@qq.com"]
 report.sendEmail("", toAddr)
+report.sendToWeChatGroup
 print "邮件群发成功！"
