@@ -136,7 +136,7 @@ class ReportCreator
 
     print "\n输出文件位于", Pathname.new(File.dirname(__FILE__)).realpath, "/", file.path, "\n"
     @reportPath = Pathname.new(File.dirname(__FILE__)).realpath.to_s+ "/"+ file.path
-    mailContentFile=open("output/#{timeStr+@title}.html.mail.txt", "w")
+    mailContentFile=open("output/#{timeStr+"jianshu_report.html.mail.txt", "w")
     mailContentFile.write outMail.force_encoding("UTF-8")
     mailContentFile.close
 
