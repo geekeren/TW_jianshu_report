@@ -129,7 +129,7 @@ class ReportCreator
     outMail =renderTplFile("view/default_mail.tpl.html")
 
     timeStr= today.strftime("[%Y-%m-%d]")
-    file=open("output/#{timeStr+@title}.html", "w")
+    file=open("output/#{timeStr}jianshu_report.html", "w")
     file.write out.force_encoding("UTF-8")
 
 
