@@ -148,7 +148,7 @@ class ReportCreator
 
     if @reportPath && @title
 
-      Mail.new().sendMailFromHtmlFile(toName, toAddr, @createTime.strftime("[%Y-%m-%d]")+"jianshu_report.html", @reportPath)
+      Mail.new().sendMailFromHtmlFile(toName, toAddr, @createTime.strftime("[%Y-%m-%d]")+"#{@title}", @reportPath)
 
     end
   end
